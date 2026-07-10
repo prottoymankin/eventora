@@ -2,8 +2,11 @@
 
 import { authClient } from "@/libs/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const handleLogin = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -20,7 +23,7 @@ export default function LoginPage() {
       },
       {
         onSuccess: () => {
-          alert("Login successful");
+          router.push("/");
         },
         onError: (ctx) => {
           alert(ctx.error.message);
