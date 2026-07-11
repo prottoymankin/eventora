@@ -3,9 +3,11 @@ import { auth } from "./auth"
 import { redirect } from "next/navigation";
 
 export const getSession = async () => {
-  return await auth.api.getSession({
+  const session = await auth.api.getSession({
     headers: await headers(),
   });
+
+  return session?.user || null;
 };
 
 export const requireRole = async (role: string) => {
@@ -13,5 +15,5 @@ export const requireRole = async (role: string) => {
 
   if (!user) redirect('/login');
 
-  if (user.user.role !== role) redirect('/unauthorized');
+  if (user?.role !== role) redirect('/unauthorized');
 }

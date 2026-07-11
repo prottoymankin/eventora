@@ -1,10 +1,11 @@
+import { DashboardSidebar } from '@/components/shared/DashboardSidebar';
 import React, { ReactNode } from 'react';
 
 const layout = ({ children } : { children : ReactNode }) => {
   return (
-    <div>
-      <aside>sidebar</aside>
-      <main>{children}</main>
+    <div className="flex flex-col lg:flex-row">
+      <DashboardSidebar />
+      <main className='flex-1'>{children}</main>
     </div>
   );
 };

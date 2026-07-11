@@ -36,28 +36,30 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-white/70 backdrop-blur-xl">
+    <header 
+      className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-900/95 backdrop-blur-xl"
+    >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
         {/* Logo */}
         <Link
           href="/"
-          className="text-2xl font-bold text-indigo-600"
+          className="text-2xl font-bold text-white"
         >
-          Eventora
+          Event<span className="text-indigo-500">ora</span>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden items-center gap-8 md:flex">
           <Link
             href="/"
-            className="font-medium text-slate-700 hover:text-indigo-600 transition"
+            className="font-medium text-slate-300 transition-colors duration-200 hover:text-indigo-400"
           >
             Home
           </Link>
 
           <Link
             href="/events"
-            className="font-medium text-slate-700 hover:text-indigo-600 transition"
+            className="font-medium text-slate-300 transition-colors duration-200 hover:text-indigo-400"
           >
             Events
           </Link>
@@ -65,7 +67,7 @@ export default function Navbar() {
           {session && (
             <Link
               href={dashboardPath}
-              className="font-medium text-slate-700 hover:text-indigo-600 transition"
+              className="font-medium text-slate-300 transition-colors duration-200 hover:text-indigo-400"
             >
               Dashboard
             </Link>
@@ -77,7 +79,7 @@ export default function Navbar() {
           {session ? (
             <button
               onClick={handleLogout}
-              className="cursor-pointer rounded-lg bg-red-500 px-5 py-2 font-medium text-white transition hover:bg-red-600 active:scale-95"
+              className="cursor-pointer rounded-lg bg-red-500 px-5 py-2 font-medium text-white transition-all duration-200 hover:bg-red-600 active:scale-95"
             >
               Logout
             </button>
@@ -85,14 +87,14 @@ export default function Navbar() {
             <>
               <Link
                 href="/login"
-                className="rounded-lg border border-slate-300 px-5 py-2 font-medium transition hover:bg-slate-100"
+                className="rounded-lg border border-slate-700 bg-slate-900 px-5 py-2 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
               >
                 Login
               </Link>
 
               <Link
                 href="/register"
-                className="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white transition hover:bg-indigo-700"
+                className="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white transition-all duration-200 hover:bg-indigo-700"
               >
                 Register
               </Link>
@@ -113,13 +115,13 @@ export default function Navbar() {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-40 bg-black/40 md:hidden"
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm md:hidden"
         />
       )}
 
       {/* Mobile Drawer */}
       <aside
-        className={`fixed top-0 right-0 z-50 h-screen w-72 border-l border-white/20 bg-white/80 backdrop-blur-xl transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 z-50 h-screen w-72 border-l border-slate-800 bg-slate-900 transition-transform duration-300 md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -130,7 +132,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsOpen(false)}
-            className="cursor-pointer"
+            className="cursor-pointer text-slate-300 transition-colors hover:text-white"
           >
             <RxCross2 size={28} />
           </button>
@@ -140,7 +142,7 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="rounded-lg px-4 py-3 font-medium hover:bg-slate-100"
+            className="rounded-xl px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
           >
             Home
           </Link>
@@ -148,7 +150,7 @@ export default function Navbar() {
           <Link
             href="/events"
             onClick={() => setIsOpen(false)}
-            className="rounded-lg px-4 py-3 font-medium hover:bg-slate-100"
+            className="rounded-xl px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
           >
             Events
           </Link>
@@ -157,7 +159,7 @@ export default function Navbar() {
             <Link
               href={dashboardPath}
               onClick={() => setIsOpen(false)}
-              className="rounded-lg px-4 py-3 font-medium hover:bg-slate-100"
+              className="rounded-xl px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
             >
               Dashboard
             </Link>
@@ -176,7 +178,7 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setIsOpen(false)}
-                  className="block rounded-lg border border-slate-300 py-3 text-center font-medium"
+                  className="block rounded-lg border border-slate-700 bg-slate-900 py-3 text-center font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
                 >
                   Login
                 </Link>
@@ -184,7 +186,7 @@ export default function Navbar() {
                 <Link
                   href="/register"
                   onClick={() => setIsOpen(false)}
-                  className="block rounded-lg bg-indigo-600 py-3 text-center font-medium text-white"
+                  className="block rounded-lg bg-indigo-600 py-3 text-center font-medium text-white transition-all duration-200 hover:bg-indigo-700"
                 >
                   Register
                 </Link>

@@ -14,7 +14,7 @@ export default function AttendeePage() {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-4">
       <h1 className="text-3xl font-bold">Attendee Dashboard</h1>
 
       <button
