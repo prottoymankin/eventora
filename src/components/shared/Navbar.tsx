@@ -3,12 +3,11 @@
 import { authClient } from "@/libs/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { RiMenuLine } from "react-icons/ri";
-import { RxCross2 } from "react-icons/rx";
+import { MobileMenu } from "./MobileMenu";
+import { MobileMenu1 } from "./MobileMenu1";
+import { toast } from "@heroui/react";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const { data: session, isPending } = authClient.useSession();
@@ -28,8 +27,8 @@ export default function Navbar() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
+          toast.success("Log out successful");
           router.push("/login");
-          router.refresh();
         },
       },
     });
@@ -101,100 +100,10 @@ export default function Navbar() {
             </>
           )}
         </div>
-
-        {/* Mobile Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="cursor-pointer md:hidden"
-        >
-          {isOpen ? <RxCross2 size={28} /> : <RiMenuLine size={28} /> }
-        </button>
+        
+        { session?.user ? <MobileMenu /> : <MobileMenu1 /> }
+     
       </nav>
-
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm md:hidden"
-        />
-      )}
-
-      {/* Mobile Drawer */}
-      <aside
-        className={`fixed top-0 right-0 z-50 h-screen w-72 border-l border-slate-800 bg-slate-900 transition-transform duration-300 md:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between border-b p-5">
-          <h2 className="text-2xl font-bold text-indigo-600">
-            Eventora
-          </h2>
-
-          <button
-            onClick={() => setIsOpen(false)}
-            className="cursor-pointer text-slate-300 transition-colors hover:text-white"
-          >
-            <RxCross2 size={28} />
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-2 p-5">
-          <Link
-            href="/"
-            onClick={() => setIsOpen(false)}
-            className="rounded-xl px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
-          >
-            Home
-          </Link>
-
-          <Link
-            href="/events"
-            onClick={() => setIsOpen(false)}
-            className="rounded-xl px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
-          >
-            Events
-          </Link>
-
-          {session && (
-            <Link
-              href={dashboardPath}
-              onClick={() => setIsOpen(false)}
-              className="rounded-xl px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
-            >
-              Dashboard
-            </Link>
-          )}
-
-          <div className="mt-4 border-t pt-4">
-            {session ? (
-              <button
-                onClick={handleLogout}
-                className="w-full cursor-pointer rounded-lg bg-red-500 py-3 font-medium text-white hover:bg-red-600"
-              >
-                Logout
-              </button>
-            ) : (
-              <div className="space-y-3">
-                <Link
-                  href="/login"
-                  onClick={() => setIsOpen(false)}
-                  className="block rounded-lg border border-slate-700 bg-slate-900 py-3 text-center font-medium text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
-                >
-                  Login
-                </Link>
-
-                <Link
-                  href="/register"
-                  onClick={() => setIsOpen(false)}
-                  className="block rounded-lg bg-indigo-600 py-3 text-center font-medium text-white transition-all duration-200 hover:bg-indigo-700"
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </aside>
     </header>
   );
 }

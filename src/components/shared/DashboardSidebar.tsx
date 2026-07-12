@@ -1,6 +1,6 @@
 import type {ComponentType, SVGProps} from "react";
 
-import {Bars, Bell, Envelope, Gear, House, Magnifier, Person, Calendar, Heart, CirclePlus, ListCheck, Persons, Ticket} from "@gravity-ui/icons";
+import {Bars, House, Person, Calendar, Heart, CirclePlus, Persons, Ticket} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
 import { getSession } from "@/libs/session";
 import Link from "next/link";
