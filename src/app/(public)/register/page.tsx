@@ -1,11 +1,14 @@
 "use client";
 
 import { authClient } from "@/libs/auth-client";
+import { toast } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
   const [fileName, setFileName] = useState<File | null>(null);
+  const router = useRouter();
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -54,7 +57,7 @@ export default function RegisterPage() {
         imageUrl = await uploadImage(fileName);
       }
 
-      const { data, error } = await authClient.signUp.email(
+      await authClient.signUp.email(
         {
           name: userRegistrationData.name as string,
           email: userRegistrationData.email as string,
@@ -65,45 +68,54 @@ export default function RegisterPage() {
         {
           onRequest: () => {},
           onSuccess: () => {
-            alert("Account created successfully");
+            toast.success("Account created successfully");
+            router.push("/login");
           },
           onError: (ctx) => {
-            alert(ctx.error.message);
+            toast.danger(ctx.error.message);
           },
         }
       );
-
-      console.log(data, error);
     } catch (error) {
       console.error(error);
-      alert("Something went wrong!");
+      toast.danger("Something went wrong!");
     }
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-      <div className="w-full max-w-lg rounded-xl bg-white p-8 shadow-lg">
-        <h1 className="text-3xl font-bold text-slate-900 text-center">
+    <main className="flex min-h-screen items-center justify-center px-4 py-10">
+
+      <div 
+        className="w-full max-w-xl rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-2xl"
+      >
+
+        <h1 className="text-3xl font-bold text-center">
           Create Account
         </h1>
 
-        <p className="mt-2 text-center text-slate-500">
+        <p className="mt-2 text-center text-slate-400">
           Join Eventora and discover amazing events.
         </p>
 
         <form className="mt-8 space-y-4" onSubmit={handleRegister}>
-          <label className="text-sm font-medium">Full Name</label>
+          <label className="mb-2 block text-sm font-medium text-slate-300">
+            Full Name
+          </label>
+
           <input
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
+            className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-indigo-500"
             name="name"
             placeholder="Full Name"
             required
             type="text"
           />
 
-          <label className="text-sm font-medium">Email</label>
+          <label className="mb-2 block text-sm font-medium text-slate-300">
+            Email
+          </label>
+
           <input
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
+            className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-indigo-500"
             name="email"
             placeholder="Email Address"
             required
@@ -111,16 +123,16 @@ export default function RegisterPage() {
           />
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">
+            <label className="mb-2 block text-sm font-medium text-slate-300">
               Profile Image
             </label>
 
             <label
               htmlFor="image"
-              className="flex flex-col items-center justify-center w-full border-2 border-dashed rounded-xl cursor-pointer hover:border-indigo-500 transition border-slate-200 px-4 py-3"
+              className="flex flex-col items-center justify-center w-full border-2 border-dashed rounded-xl cursor-pointer border-slate-700 bg-slate-950 transition-all duration-200 hover:border-indigo-500 hover:bg-slate-900 px-4 py-3"
             >
               <div className="flex flex-col items-center gap-3">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm font-medium text-white">
                   {fileName?.name || "Click to upload profile image"}
                 </p>
               </div>
@@ -129,16 +141,19 @@ export default function RegisterPage() {
                 id="image"
                 name="image"
                 type="file"
-                accept="image/*"
                 className="hidden"
+                accept="image/*"
                 onChange={handleImageChange}
               />
             </label>
           </div>
 
-          <label className="text-sm font-medium">Password</label>
+          <label className="mb-2 block text-sm font-medium text-slate-300">
+            Password
+          </label>
+
           <input
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
+            className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-indigo-500"
             name="password"
             placeholder="Password"
             required
@@ -146,10 +161,13 @@ export default function RegisterPage() {
           />
 
           <div>
-            <label className="text-sm font-medium">Account type</label>
+            <label className="mb-2 block text-sm font-medium text-slate-300">
+              Account type
+            </label>
+
             <select
               name="role"
-              className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-700 outline-none focus:border-indigo-500"
+              className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-indigo-500"
             >
               <option value="attendee">Attendee</option>
               <option value="organizer">Organizer</option>
