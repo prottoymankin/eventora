@@ -1,6 +1,24 @@
+"use client";
+
+import { updateUserRole } from "@/libs/actions/users";
 import { User } from "@/types/users";
+import { toast } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 const UsersTable = ({ users } : { users : User[] }) => {
+  const router = useRouter();
+
+  const changeUserRole = async ( id : string , role : string ) => {
+    const response = await updateUserRole(id, { role });
+    
+    if (response.message) {
+      toast.success(response.message);
+      router.refresh();
+    } else {
+      toast.danger("An error occurred, try again later.");
+    }
+  }
+
   return (
     <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900">
       <table className="min-w-full">
@@ -53,6 +71,7 @@ const UsersTable = ({ users } : { users : User[] }) => {
                 <select
                   value={user?.role}
                   className="cursor-pointer rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 outline-none transition focus:border-indigo-500"
+                  onChange={(e) => changeUserRole(user?._id, e.target.value)}
                 >
                   <option value="attendee">Attendee</option>
                   <option value="organizer">Organizer</option>
