@@ -6,11 +6,12 @@ import {
   MapPin,
   Users,
   Heart,
-  Ticket,
   User,
 } from "lucide-react";
 import { getEventById } from "@/libs/api/events";
 import { formatDate } from "@/utils/formateDate";
+import BookNowBtn from "@/components/ui/BookNowBtn";
+import { getSession } from "@/libs/session";
 
 const EventDetailsPage = async (
   { params } : { 
@@ -20,7 +21,8 @@ const EventDetailsPage = async (
   const { id } = await params;
   
   const { eventDetails } = await getEventById(id);
-  console.log(eventDetails)
+
+  const user = await getSession();
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10 w-full">
@@ -100,17 +102,22 @@ const EventDetailsPage = async (
           </div>
 
           {/* Buttons */}
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <button className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900 py-3 font-medium text-white transition hover:border-red-500 hover:text-red-400">
-              <Heart size={18} />
-              Add to Favorites
-            </button>
+          {
+            user?.role === "attendee" && (
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <button 
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900 py-3 font-medium text-white transition hover:border-red-500 hover:text-red-400 cursor-pointer"
+                >
+                  <Heart size={18} />
+                  Add to Favorites
+                </button>
 
-            <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3 font-semibold text-white transition hover:bg-indigo-500">
-              <Ticket size={18} />
-              Book Now
-            </button>
-          </div>
+                <BookNowBtn
+                  eventDetails={eventDetails} 
+                />
+              </div>
+            )
+          }
         </div>
       </div>
 
