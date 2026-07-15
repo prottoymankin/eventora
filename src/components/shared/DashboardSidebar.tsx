@@ -33,9 +33,9 @@ export async function DashboardSidebar() {
     label: string, 
     href: string
   }[] = [
-     { icon: Persons, label: "Users", href: "/admin/users" },
-     { icon: Calendar, label: "Events", href: "/admin/events" },
-     { icon: Ticket, label: "Registrations", href: "/admin/registrations" },
+     { icon: Persons, label: "All Users", href: "/admin/users" },
+     { icon: Calendar, label: "All Events", href: "/admin/events" },
+     { icon: Ticket, label: "All Bookings", href: "/admin/bookings" },
   ];
 
   const userRole = {
