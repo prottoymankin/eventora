@@ -14,6 +14,7 @@ export type Event = {
   "organizerName": string,
   "organizerEmail": string,
   "status": string,
-  "registeredCount": number,
   "createdAt": string
 }
+
+export type CreateEvent = Omit<Event, "_id">;

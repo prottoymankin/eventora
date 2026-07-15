@@ -23,7 +23,7 @@ export async function DashboardSidebar() {
     label: string, 
     href: string
   }[] = [
-     { icon: CirclePlus, label: "Add Event", href: "/organizer/add-event" },
+     { icon: CirclePlus, label: "Add Event", href: "/organizer/add-events" },
      { icon: Calendar, label: "My Events", href: "/organizer/my-events" },
      { icon: Persons, label: "Attendees", href: "/organizer/attendees" },
   ];
