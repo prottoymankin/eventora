@@ -2,6 +2,7 @@
 
 import { updateUserRole } from "@/libs/actions/users";
 import { User } from "@/types/users";
+import { formatDate } from "@/utils/formateDate";
 import { toast } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
@@ -59,7 +60,9 @@ const UsersTable = ({ users } : { users : User[] }) => {
               <td className="px-6 py-4 text-slate-300">{user?.email}</td>
 
               {/* Joined */}
-              <td className="px-6 py-4 text-slate-400">14 Jul 2026</td>
+              <td className="px-6 py-4 text-slate-400">
+                {formatDate(user?.createdAt)}
+              </td>
 
               {/* Role */}
               <td className="px-6 py-4 text-slate-400">

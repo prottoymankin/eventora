@@ -57,7 +57,7 @@ const EventCard = ({ event } : { event : Event }) => {
       {/* Footer */}
       <div className="border-t border-slate-800 p-5">
         <Link
-          href="/events/1"
+          href={`/events/${event?._id}`}
           className="flex w-full items-center justify-center rounded-xl bg-indigo-600 py-3 font-semibold text-white transition-all duration-300 hover:bg-indigo-500 active:scale-[0.98]"
         >
           View Details
