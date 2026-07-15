@@ -1,8 +1,8 @@
 "use client";
 
 import { Event } from "@/types/events";
-import { Button, Chip } from "@heroui/react";
-import { Check, X } from "lucide-react";
+import { Chip } from "@heroui/react";
+import StatusChangeBtns from "./StatusChangeBtns";
 
 const EventsTable = ({ events } : { events : Event[] }) => {
   return (
@@ -68,19 +68,7 @@ const EventsTable = ({ events } : { events : Event[] }) => {
               </td>
 
               <td className="px-6 py-4 text-center flex gap-2">
-                <Button
-                  isIconOnly
-                  className="bg-green-600"
-                >
-                  <Check />
-                </Button>
-
-                <Button
-                  isIconOnly
-                  className="bg-red-600"
-                >
-                  <X />
-                </Button>
+                <StatusChangeBtns id={event?._id} />
               </td>
             </tr>
           ))}
