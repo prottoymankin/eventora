@@ -9,3 +9,9 @@ export const changeBookingStatus = async (
     body: JSON.stringify(updateData)
   });
 }
+
+export const deleteEventById = async (id: string) => {
+  return serverMutation(`/api/event/${id}`, {
+    method: "DELETE"
+  });
+}

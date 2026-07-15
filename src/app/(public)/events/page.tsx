@@ -1,9 +1,9 @@
 import EventCard from "@/components/shared/EventCard";
-import { getEvents } from "@/libs/api/events";
+import { getApprovedEvents } from "@/libs/api/events";
 import { Event } from "@/types/events";
 
 const EventsPage = async () => {
-  const { events } : { events : Event[] } = await getEvents();
+  const { events } : { events : Event[] } = await getApprovedEvents();
 
   return (
     <div className="px-5 max-w-7xl mx-auto w-full space-y-15 py-20">
