@@ -4,6 +4,7 @@ import {Bars, House, Person, Calendar, Heart, CirclePlus, Persons, Ticket} from 
 import {Button, Drawer} from "@heroui/react";
 import { getSession } from "@/libs/session";
 import Link from "next/link";
+import { ClockCheck } from "lucide-react";
 
 export async function DashboardSidebar() {
   const user = await getSession();
@@ -25,7 +26,7 @@ export async function DashboardSidebar() {
   }[] = [
      { icon: CirclePlus, label: "Add Event", href: "/organizer/add-events" },
      { icon: Calendar, label: "My Events", href: "/organizer/my-events" },
-     { icon: Persons, label: "Attendees", href: "/organizer/attendees" },
+     { icon: ClockCheck, label: "Booking Requests", href: "/organizer/booking-requests" },
   ];
 
   const adminNavItems : {
