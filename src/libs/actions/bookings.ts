@@ -7,3 +7,13 @@ export const eventBooking = async (bookingData : CreateBooking) => {
     body: JSON.stringify(bookingData)
   })
 }
+
+export const changeBookingStatus = async (
+  id : string,
+  updateData : { bookingStatus : string }
+) => {
+  return serverMutation(`/api/booking/organizer/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(updateData)
+  });
+}
