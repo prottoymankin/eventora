@@ -18,10 +18,10 @@ export default function Navbar() {
 
   const dashboardPath =
     session?.user.role === "admin"
-      ? "/admin"
+      ? "/admin/users"
       : session?.user.role === "organizer"
-      ? "/organizer"
-      : "/attendee";
+      ? "/organizer/my-events"
+      : "/attendee/my-registered-events";
 
   const handleLogout = async () => {
     await authClient.signOut({
