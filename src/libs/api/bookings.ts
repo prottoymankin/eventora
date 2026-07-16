@@ -7,3 +7,7 @@ export const getAllBookings = async () => {
 export const getBookingsByOrganizerId = async ( id : string ) => {
   return serverFetch(`/api/bookings/organizer/${id}`);
 }
+
+export const getBookingsByAttendeeId = async (id : string) => {
+  return serverFetch(`/api/bookings/attendee/${id}`);
+}
